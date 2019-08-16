@@ -99,9 +99,11 @@ travis encrypt DOCKER_USERNAME myusername --add
 travis encrypt DOCKER_PASS secretsecret --add
 ```
 # Limitations
-As this is meant to be a boilerplate application, the following functionality have been not been implemented or have been implemented in limited capacity:
-- Error handling: Limited
+As this is meant to be a boilerplate application, the following functionality have not been implemented:
 - Logging: Not implemented
-- Security/Authentication: Not implemented
+- Secure HTTP headers: Not implemented
+  - Exposes the application by identifying itself as an express app which increases the risk of specifically-targeted attacks (i.e. express exploits). Recommendation: Either use Helmet or disaple X-Powered-By header.
+- TLS: Not implemented
+  - Data is not encrpyted in transit. Risks of packet sniffing and man-in-the-middle attacks on sensitive data. Recommendation: Implement TLS.
 
 Additionally, the boilerplate only implements examples of GET request. To implement additional types of HTTP request methods, please refer to the Express documentation (https://expressjs.com/en/starter/basic-routing.html)  
