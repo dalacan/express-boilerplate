@@ -1,6 +1,6 @@
 # Express.JS Boilerplate
 
-A basic Express API boilerplate implementing a TravisCI docker build pipeline.
+A simple Express API boilerplate with a TravisCI and docker build pipeline.
 
 ## API
 
@@ -84,7 +84,7 @@ Additionally, the application can be ran in developer mode to continous developm
 # Test
 Unit tests can be ran by running the following command `npm run test`
 
-Tests can be found in the /test folder.
+Tests can be found in the /tests folder.
 
 # Deployment
 The boilerplate include a TravisCI automated build pipeline which will:
@@ -98,3 +98,10 @@ In order to publish to your docker hub registry, make sure you update your .trav
 travis encrypt DOCKER_USERNAME myusername --add
 travis encrypt DOCKER_PASS secretsecret --add
 ```
+# Limitations
+As this is meant to be a boilerplate application, the following functionality have been not been implemented or have been implemented in limited capacity:
+- Error handling: Limited
+- Logging: Not implemented
+- Security/Authentication: Not implemented
+
+Additionally, the boilerplate only implements examples of GET request. To implement additional types of HTTP request methods, please refer to the Express documentation (https://expressjs.com/en/starter/basic-routing.html)  
