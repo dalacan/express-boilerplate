@@ -1,0 +1,14 @@
+language: node_js
+cache:
+  directories:
+    - "node_modules"
+# jobs:
+#   include:
+#     - stage: "Build"
+#       script:
+#       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+#       - docker build -t innablrjs .
+#       - docker images
+#       - docker tag innablrjs $DOCKER_USERNAME/innablrjs
+#       - docker push $DOCKER_USERNAME/innablrjs
+#     - stage: "Publish"

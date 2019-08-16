@@ -1,0 +1,27 @@
+{
+  "name": "innablrjs",
+  "version": "1.0.0",
+  "description": "microservice boilerplate",
+  "main": "api/index.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "mocha ./tests --recursive"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dalacan/innablrjs.git"
+  },
+  "keywords": [
+    "microservice"
+  ],
+  "author": "Derrick Choo",
+  "homepage": "https://github.com/dalacan/innablrjs#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^6.2.0"
+  }
+}
