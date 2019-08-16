@@ -1,5 +1,9 @@
 FROM node:12-alpine
 
+ARG SOURCE_COMMIT
+ENV SOURCE_COMMIT $SOURCE_COMMIT
+RUN echo "SOURCE_COMMIT = $SOURCE_COMMIT"
+
 # Create application directory
 WORKDIR './app'
 

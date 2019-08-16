@@ -10,21 +10,21 @@ jobs:
   - stage: Test
     script:
     - echo "Testing"
-    - docker build -t $DOCKER_USERNAME/express-boilerplate-test --build-arg "SOURCE_COMMIT==$(git rev-parse HEAD)" -f Dockerfile.test .
+    - docker build -t $DOCKER_USERNAME/express-boilerplate-test --build-arg "SOURCE_COMMIT=$(git rev-parse HEAD)" -f Dockerfile.test .
     - docker run --rm $DOCKER_USERNAME/express-boilerplate-test
-  - stage: Build
+  - stage: Build and Publish
     script:
     - echo "Building"
-    # - export LAST_COMMIT_SHA="${LAST_COMMIT_SHA:-$(git rev-parse HEAD)}"
-    # - echo "$DOCKER_PASS" | docker login -u "$DOCKER_USERNAME" --password-stdin
-    # - echo "Docker login success"
-    # - docker build -t $DOCKER_USERNAME/express-boilerplate --build-arg "LAST_COMMIT_SHA=$LAST_COMMIT_SHA" .
-    # - docker images
-    # - docker tag  $DOCKER_USERNAME/express-boilerplate $DOCKER_USERNAME/express-boilerplate
-    # - docker push $DOCKER_USERNAME/express-boilerplate
-  - stage: Publish
-    script:
-    - echo "Publishing"
+    - export LAST_COMMIT_SHA="${LAST_COMMIT_SHA:-$(git rev-parse HEAD)}"
+    - echo "$DOCKER_PASS" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - docker build -t $DOCKER_USERNAME/express-boilerplate --build-arg "SOURCE_COMMIT=$(git rev-parse HEAD)" .
+    - docker images
+    - echo "Publishing to docker registry"
+    - docker tag  $DOCKER_USERNAME/express-boilerplate $DOCKER_USERNAME/express-boilerplate
+    - docker push $DOCKER_USERNAME/express-boilerplate
+  # - stage: Publish
+  #   script:
+  #   - echo "Publishing"
 env:
   global:
   - secure: QJMga6INpW0uY6KlKjgT2u8OK6kBdgRZWvvGn6559eib3a2gVWIDFZJvX8nyzLYRlgky1LWiSKyeZYhJzTxCcPSebxI9TUEpDrua9ciTR+1e1/yCVM/eu5nAqyRkWj9fBWOD27pXWQ5A0edJ6jowOWtPySarP7LPiH2Wy0C/8xkpIiR0wsynRAIZcIQ9RDPjnCY3A31Zx6LLXKBY+nE/c/vrIi/moOS8oHS4exZG//LeP24r/E6cYVY0fyfSD/zRYCARZXb9eFhqAYtajwWU/p1/SC4ssF1TMLI+hQrH5EgWAKhPQeUTOwQPEnsZyhKvytcDVCktAPkroVL+Og5QEG2yJ51FC8SC76t5qungiatEKXWjp/SMiwuWnKCSaW02fIqB8w18BKMLXNUQLgZ3rnT2QPPGD7DvK7oaJtmybnJAxwSgRaAJXpOlXdP7rwdXz1+mQxXHlDErNt5RjkKqbExpDE47NS8uv9fK9Wt78NJxFYlsz1kLCmMez9/eRMg6qgwNLa7w418Nog30Q7jqA/mWuw137jHQpGc5ZX5gLdSXVt2TZaWfEMwXJLrKXjNENi53QY/wphtQHfLARGz30xt3z8nBP0RNRLyivzLbdHTvXS9hYp0eAsRH9uAS84wWfEbcVZEhCte5GLQfOAk3b9iIP/Ox0K0x/11WU2SJicg=
