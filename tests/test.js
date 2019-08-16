@@ -26,7 +26,7 @@ describe('GET /status', () => {
     chai.request(server)
               .get("/status")
               .end((err, res) => {
-                // console.log(res.body)
+                console.log(res.body)
                 res.should.have.status(200);
                 res.should.be.json;
                 res.body.should.be.a('object');
