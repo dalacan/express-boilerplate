@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-if(process.env.LAST_COMMIT_SHA) {
-  last_commit_sha = process.env.LAST_COMMIT_SHA;
+if(process.env.SOURCE_COMMIT) {
+  last_commit_sha = process.env.SOURCE_COMMIT;
 }
 else {
   last_commit_sha = require('child_process')
