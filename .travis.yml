@@ -10,7 +10,7 @@ jobs:
   - stage: Test
     script:
     - echo "Testing"
-    - docker build -t $DOCKER_USERNAME/express-boilerplate-test -f DockerFile.test .
+    - docker build -t $DOCKER_USERNAME/express-boilerplate-test -f Dockerfile.test .
     - docker run --rm $DOCKER_USERNAME/express-boilerplate-test
   - stage: Build
     script:
