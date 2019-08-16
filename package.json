@@ -5,7 +5,7 @@
   "main": "api/index.js",
   "scripts": {
     "start": "node server.js",
-    "test": "mocha ./tests --recursive"
+    "test": "mocha ./tests --recursive --exit"
   },
   "repository": {
     "type": "git",
