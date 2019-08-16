@@ -1,5 +1,5 @@
 {
-  "name": "express.js boilerplate",
+  "name": "Express API boilerplate",
   "version": "1.0.0",
   "description": "microservice boilerplate",
   "main": "api/index.js",
