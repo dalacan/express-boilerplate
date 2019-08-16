@@ -10,17 +10,19 @@ jobs:
   - stage: Test
     script:
     - echo "Testing"
-    - docker build -t $DOCKER_USERNAME/express-boilerplate-test -f Dockerfile.test .
+    - export LAST_COMMIT_SHA="${LAST_COMMIT_SHA:-$(git rev-parse HEAD)}"
+    - docker build -t $DOCKER_USERNAME/express-boilerplate-test --build-arg "LAST_COMMIT_SHA=$LAST_COMMIT_SHA" -f Dockerfile.test .
     - docker run --rm $DOCKER_USERNAME/express-boilerplate-test
   - stage: Build
     script:
     - echo "Building"
-    - echo "$DOCKER_PASS" | docker login -u "$DOCKER_USERNAME" --password-stdin
-    - echo "Docker login success"
-    - docker build -t $DOCKER_USERNAME/express-boilerplate .
-    - docker images
-    - docker tag  $DOCKER_USERNAME/express-boilerplate $DOCKER_USERNAME/express-boilerplate
-    - docker push $DOCKER_USERNAME/express-boilerplate
+    # - export LAST_COMMIT_SHA="${LAST_COMMIT_SHA:-$(git rev-parse HEAD)}"
+    # - echo "$DOCKER_PASS" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    # - echo "Docker login success"
+    # - docker build -t $DOCKER_USERNAME/express-boilerplate --build-arg "LAST_COMMIT_SHA=$LAST_COMMIT_SHA" .
+    # - docker images
+    # - docker tag  $DOCKER_USERNAME/express-boilerplate $DOCKER_USERNAME/express-boilerplate
+    # - docker push $DOCKER_USERNAME/express-boilerplate
   - stage: Publish
     script:
     - echo "Publishing"
