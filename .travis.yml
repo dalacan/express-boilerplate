@@ -14,13 +14,13 @@ jobs:
     - docker run --rm $DOCKER_USERNAME/express-boilerplate-test
   - stage: Build
     script:
-    # - echo "Building"
-    # - echo "$DOCKER_PASS" | docker login -u "$DOCKER_USERNAME" --password-stdin
-    # - echo "Docker login success"
-    # - docker build -t $DOCKER_USERNAME/express-boilerplate .
-    # - docker images
-    # - docker tag  $DOCKER_USERNAME/express-boilerplate $DOCKER_USERNAME/express-boilerplate
-    # - docker push $DOCKER_USERNAME/express-boilerplate
+    - echo "Building"
+    - echo "$DOCKER_PASS" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - echo "Docker login success"
+    - docker build -t $DOCKER_USERNAME/express-boilerplate .
+    - docker images
+    - docker tag  $DOCKER_USERNAME/express-boilerplate $DOCKER_USERNAME/express-boilerplate
+    - docker push $DOCKER_USERNAME/express-boilerplate
   - stage: Publish
     script:
     - echo "Publishing"
