@@ -1,15 +1,16 @@
-language: node_js
-node_js:
-- node
-cache:
-  directories:
-  - node_modules
 jobs:
   include:
+  - stage: Pre-built Test
+    language: node_js
+    node_js:
+    - node
+    cache:
+      directories:
+      - node_modules
   - stage: Test
     script:
     - echo "Testing"
-    - docker build -t $DOCKER_USERNAME/express-boilerplate-test -f Dockerfile.test .
+    - docker build -t $DOCKER_USERNAME/express-boilerplate-test -f DockerFile.test .
     - docker run --rm
   - stage: Build
     script:
