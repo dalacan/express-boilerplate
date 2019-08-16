@@ -11,10 +11,6 @@ app.use(express.json());
 app.use('/', indexRouter);
 app.use('/status', statusRouter);
 
-// app.use('/', function(req, res) {
-//     res.send('hello worlds');
-// });
-
 var server = http.createServer(app);
 var port = 3000;
 server.listen(port);

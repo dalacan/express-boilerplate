@@ -9,18 +9,20 @@ var expect = chai.expect;
 var should = chai.should();
 chai.use(chaiHttp);
 
+// Test the root endpoint
 describe('GET /', () => {
   it('should return a hello world string', (done) => {
     chai.request(server)
               .get("/")
               .end((err, res) => {
                 expect(res).to.have.status(200);
-                expect(res.text).to.equal('hello world');
+                expect(res.text).to.equal('Hello World');
             done();
               });
   });
 });
 
+// Test the status endpoint
 describe('GET /status', () => {
   it('should return json status', (done) => {
     chai.request(server)
