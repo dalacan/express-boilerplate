@@ -1,6 +1,7 @@
 # Express.JS Boilerplate
+[![Build Status](https://travis-ci.org/dalacan/express-boilerplate.svg?branch=master)](https://travis-ci.org/dalacan/express-boilerplate)
 
-A basic Express API boilerplate implementing a TravisCI docker build pipeline.
+A simple Express API boilerplate with a TravisCI and docker build pipeline.
 
 ## API
 
@@ -84,7 +85,7 @@ Additionally, the application can be ran in developer mode to continous developm
 # Test
 Unit tests can be ran by running the following command `npm run test`
 
-Tests can be found in the /test folder.
+Tests can be found in the /tests folder.
 
 # Deployment
 The boilerplate include a TravisCI automated build pipeline which will:
@@ -98,3 +99,12 @@ In order to publish to your docker hub registry, make sure you update your .trav
 travis encrypt DOCKER_USERNAME myusername --add
 travis encrypt DOCKER_PASS secretsecret --add
 ```
+# Limitations
+As this is meant to be a boilerplate application, the following functionality have not been implemented:
+- Logging: Not implemented
+- Secure HTTP headers: Not implemented
+  - Exposes the application by identifying itself as an express app which increases the risk of specifically-targeted attacks (i.e. express exploits). Recommendation: Either use Helmet or disable X-Powered-By header.
+- TLS: Not implemented
+  - Data is not encrpyted in transit. Risks of packet sniffing and man-in-the-middle attacks on sensitive data. Recommendation: Implement TLS.
+
+Additionally, the boilerplate only implements examples of GET request. To implement additional types of HTTP request methods, please refer to the Express documentation (https://expressjs.com/en/starter/basic-routing.html)  
