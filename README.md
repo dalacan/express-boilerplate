@@ -103,7 +103,7 @@ travis encrypt DOCKER_PASS secretsecret --add
 As this is meant to be a boilerplate application, the following functionality have not been implemented:
 - Logging: Not implemented
 - Secure HTTP headers: Not implemented
-  - Exposes the application by identifying itself as an express app which increases the risk of specifically-targeted attacks (i.e. express exploits). Recommendation: Either use Helmet or disaple X-Powered-By header.
+  - Exposes the application by identifying itself as an express app which increases the risk of specifically-targeted attacks (i.e. express exploits). Recommendation: Either use Helmet or disable X-Powered-By header.
 - TLS: Not implemented
   - Data is not encrpyted in transit. Risks of packet sniffing and man-in-the-middle attacks on sensitive data. Recommendation: Implement TLS.
 
