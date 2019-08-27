@@ -96,8 +96,8 @@ The boilerplate include a TravisCI automated build pipeline which will:
 ## Setting up TravisCI 
 In order to publish to your docker hub registry, make sure you update your .travis.yml via Travis CLI by running the following commands:
 ```
-travis encrypt DOCKER_USERNAME myusername --add
-travis encrypt DOCKER_PASS secretsecret --add
+travis encrypt "DOCKER_USERNAME='myusername'" --add
+travis encrypt "DOCKER_PASS='secretsecret'" --add
 ```
 # Limitations
 As this is meant to be a boilerplate application, the following functionality have not been implemented:
