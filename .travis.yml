@@ -1,30 +1,30 @@
 jobs:
   include:
-  - stage: Pre-built Test
-    language: node_js
-    node_js:
-    - node
-    cache:
-      directories:
-      - node_modules
+  # - stage: Pre-built Test
+  #   language: node_js
+  #   node_js:
+  #   - node
+  #   cache:
+  #     directories:
+  #     - node_modules
   - stage: Test
     script:
     - echo "Testing"
-    - echo "$DOCKER_USERNAME"
+    - echo $TRAVIS_BRANCH
     - echo $DOCKER_USERNAME
     - docker build -t $DOCKER_USERNAME/express-boilerplate-test --build-arg "SOURCE_COMMIT=$(git rev-parse HEAD)" -f Dockerfile.test .
     - docker run --rm $DOCKER_USERNAME/express-boilerplate-test
-  - stage: Build and Publish
-    script:
-    - echo "Building"
-    - export LAST_COMMIT_SHA="${LAST_COMMIT_SHA:-$(git rev-parse HEAD)}"
-    - echo "$DOCKER_PASS" | docker login -u "$DOCKER_USERNAME" --password-stdin
-    - docker build -t $DOCKER_USERNAME/express-boilerplate --build-arg "SOURCE_COMMIT=$(git rev-parse HEAD)" .
-    - docker images
-    - echo "Publishing to docker registry"
-    - docker tag  $DOCKER_USERNAME/express-boilerplate $DOCKER_USERNAME/express-boilerplate
-    - docker push $DOCKER_USERNAME/express-boilerplate
+  # - stage: Build and Publish
+  #   script:
+  #   - echo "Building"
+  #   - export LAST_COMMIT_SHA="${LAST_COMMIT_SHA:-$(git rev-parse HEAD)}"
+  #   - echo "$DOCKER_PASS" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  #   - docker build -t $DOCKER_USERNAME/express-boilerplate --build-arg "SOURCE_COMMIT=$(git rev-parse HEAD)" .
+  #   - docker images
+  #   - echo "Publishing to docker registry"
+  #   - docker tag  $DOCKER_USERNAME/express-boilerplate $DOCKER_USERNAME/express-boilerplate
+  #   - docker push $DOCKER_USERNAME/express-boilerplate
 env:
   global:
-  - secure: UzoiXCaPQ1uVu01BZP7a6mUbvsSVTwNRHluirWO3CLwyMT9cXV2KbIzND695hcqTxSEm2zdG/EoTcZxhEVSZir1v+eQpxyRebEXpeRpYk4dVouYxn6lfyxvUFbVx2e50mBfyL9mgHw1nMDGcdIh2IKSbJETo0W8FyUnWs9QGqTA537hmrV22A2nRPeXFCxGjuFMYJcypukzLEMEWSPCRoXVuc8beCQJMdXdc3t1jEpM0cLYIhUhaid+bYxd4fzq7q7mzCTEWvWjRDjCUU9Cq+sL8Y4k0/gTHH6BIIcHoh1UoXhPgtY8ypklwDLFBOFBlCkj9XlFWx+QZXfA2DW9K1X3KUrRmkquyIowa8oYT6AKEA2eWX3eCPoPTr/YZdS5jh4TkDuQcdHftO9b7gDbB5HdlMA3uch0e0FOnzXKuvyYG8mQc9Z6aCm1uRuzS3bYPhILoEkf7PvmrFY0LQLX4C1btD1nu+AErcU99JqTB28xmOPawMuctZccUB34qazIJvK+8IhAJ6fTjsSBucMmSxoncP3+UIiJEYKXiGNizMTJy7jjpptQc0m1ebGrrd0VGFm3/CzKhnh6hzQNhOE5Fcfx4hge44qV+KS1GgEf3M67PhKo3pyF7/H/WkO3Wd6DvhJ3W68fjt6ZclLtka51wulQhDzt1jUd9MNeAokIYVL0=
-  - secure: bQMcwKqUDznUrUjFWt2exqPQ1BKJHXODXhepM6JXdkEHN9r9k8RA44thaUUMt9KHk4cAGzj1fGx7icdAxtjdBSlHpGz+rUE7yras6aGlw2Y21rEGnSZuP58X6aIfIts4uA2HL6PX1Bsi3dT4b6YKvY9K6/cHbnih4DUncykT9GhU+TOkpgQvCCcNXCmYtflS9q+Gdu7QZcQDcopuHSFVIStg8jnH0svCUI6H/NF2OyH8tM0Y/yU1pyK9MszuaSovxUvJ0RRtjxWWI355plzeYG0HC7Qcxtg0Dc66gsPjQ7tJXLbiFMBnk9JELwn8xi3A8Nkax6xD6W6QnCTRW5fkLGOdOchSs8Qpu9Ob+2eCwsLu5bFyztrOqnww6FiNrh5JU1vMXwAf3u9E51K1PczbRCxfp1vOp3xsCwed/E5ply2OL8jUOIf9Tsp6Bvf1rK0jJIJQM65HyN1C6HRxxoK2GlalvIz7IpDfwtQ44r/nTxSHGtpk8eteGX6LS+ko6ujvLYDGElpzxjKnljVchFGF34id0gVe73oXbLynca7codldBhZ8A6kXmyOT7TiiSaVoTJ5MX3TrOmGLKPb893Xt6cZ6UoVUr5v7lRuoplH5tPtAVJATcYbOdRBxOdznjsVBPKxVhTqOH5VoevUfj/haA5d6pehm5eLfHobmg5P7GTI=
+  - secure: hx4DdQvAWw3vKffi0FGp6U+da1bRS/OEX1/uxTU3QUYPlD9EFXmJli1Cah++8s1gNfjaR6q4oQHU4PCUL02q2TUEVKbKph/3s2tsGnLktB5F32VWBEM/M0P75wTVFsaIWvAXnmYIlflTWIbOkdOGi2PeJfjMu1C3wfRlemuhGiUZeoa5ghfVWC2n9UwEXYRgau2OWQilYr5nUE2w8EBZIJjBMJmVgjZjV0jhEkKSQsfVJa/Q+P6k52wVDFrrMToljYMBn+/RM9LXzf7QI/kiPfv9GK/vTI5Glb8fPD2WgehQrfQtQrnKaAt0V3EfJpOVUTt9Z3GhuyUfHa60muYUO9TQhg71Ja9H28V3W4gZJFZUDT4qSf2LINKb7eLvtmwKQzxbzSq+5l4iv5wsaFarcz9c2mtjp6QDhDQeGTxGxk9YfxMSs7/RrUoySOvWYMrBoAFhK9PNk4DhYmBg8qqKoZftvGbepAq1PWRsp5LM+/hRPcCHvswvVBTm1lV0efhCn+KIprUTSNF54Er4GqJC7y5WQpsoJXDm8me7/0V9JUqAiS+E3TG9NgT1gExn6xJu0FsVJahMRMnPqDCexhlJilTnKcZVOxNjAezelJils37bTf4oSM5/eQeKZ2Jata1bBJO/HGaadla33D4jKoC86E3VtDbtCFGMssHaPEy8BZA=
+  - secure: A9KEPot5hgONdPIZksfozE54wGZZP7kRAV7S0W4hWmWqsVdeh2HU8/3FA51ldPNHj+ISjoX9aeWjBz59pu2HsObZj9bMJzRxQpUYtlaXSqjhBRMDkb5WK7vVaVLm7bQcQiDeon2KWynQbnHJGmHKcThcizp3fXWdiRHhMuVLOY47bkpIe9qe3zWB2u76sukiC3mncTCtSKbNqGXCIg1kVHpSCprx/dhrnjB/LYOCVG9yDnG/rkNQkCgj8hisX/T6iL/4jhq+Gdxt7LkpayAwLgeaOzG/LvBJ4KaCo9FWJCNk7aQiXGatQ1Gkxz60P5t0GLGVZ0CN3O2dQ7XFBh+aGyQT6L6TVYsMyukfYoyTHQVvzlcwskUAPb+H+PQt3xMSFmeZDqAfxzCS44wM85qYLhOqNi4gi825iOMgSYDVhJQTSaWOXoirYyudvvW46OHuHnT8olEKAVlWGxDn9zZ4/7dTN3UapYL+GLWXOVpWABlqddP5KlyVtBs1xnJAbAn/nItp7oSfkUG8obJwrb89lYbLFd/gwF/r7FpdH0tqqmaQE4/vmgW5oSIezguawByALsGzXiahjhidV150oMg/Wtn9bLV1OFgPlrqUU1aHkGlzNtFMCFLUagrBxd4KQG/7eF9OzJwXDM86UpndXHasbTwb2rob1WPYEHof1ve5nPs=
